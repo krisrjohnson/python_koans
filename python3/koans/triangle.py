@@ -18,7 +18,19 @@
 #
 def triangle(a, b, c):
     # DELETE 'PASS' AND WRITE THIS CODE
-    pass
+    ans = ''
+    a, b, c = sorted([a,b,c])
+    if (a<=0 or b<=0 or c<=0): raise TriangleError #check sides are > 0
+    if ((a + b) < c): raise TriangleError #check this config can even form a triangle
+    
+    if (a==b and b==c):
+    	ans = 'equilateral'
+    elif (a==b or b==c or a==c):
+    	ans = 'isosceles'
+    else: 
+    	ans = 'scalene'
+    
+    return ans
 
 # Error class used in part 2.  No need to change this code.
 class TriangleError(Exception):
