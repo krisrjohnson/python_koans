@@ -33,8 +33,33 @@ from runner.koan import *
 # Your goal is to write the score method.
 
 def score(dice):
-    # You need to write this method
-    pass
+    score = 0
+    if (dice==[]): return score
+    #TODO: do all the 3-of-a-kind in one step, 
+    # possibly using a dict of value awarded (aka times 1000 for 1's, 100 for 2-6)
+    # additionally do the extra 1 and 5's in one step, dict w/ {1:100, 2:0, 3:0, 4:0, 5:50, 6:0}
+
+    # create a list that'll be the counts of each die face, 
+    # aka die_counts[5] is how many 6's were rolled
+    die_counts = list(0 for i in range(6))
+    for i in dice:
+        die_counts[i-1] += 1
+
+    if (die_counts[0] >= 3): 
+        score += 1000
+        die_counts[0] += -3
+
+    #now that the special 1's case is handled, do the #*100 case for any other faces and update
+    score += sum((i+1) * 100 for i in range(6) if die_counts[i] >= 3)
+    for i in range(len(die_counts)):
+        if (die_counts[i] >= 3):
+            die_counts[i] += -3
+
+    score += die_counts[0] * 100
+    score += die_counts[4] * 50
+
+    return score
+    
 
 class AboutScoringProject(Koan):
     def test_score_of_an_empty_list_is_zero(self):
