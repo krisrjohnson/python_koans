@@ -131,8 +131,7 @@ class AboutClasses(Koan):
             return self
 
         def __str__(self):
-            docstr = "Is this a doc string?"
-            return docstr
+            return self._name
 
         def __repr__(self):
             return "<Dog named '" + self._name + "'>"
@@ -141,7 +140,7 @@ class AboutClasses(Koan):
         fido = self.Dog6("Fido")
 
         print(fido.get_self())
-        self.assertEqual(Koan.Dog6("Fido"), fido.get_self())  # Not a string!
+        self.assertEqual(fido, fido.get_self())  # Not a string!
 
     def test_str_provides_a_string_version_of_the_object(self):
         fido = self.Dog6("Fido")
@@ -151,17 +150,17 @@ class AboutClasses(Koan):
     def test_str_is_used_explicitly_in_string_interpolation(self):
         fido = self.Dog6("Fido")
 
-        self.assertEqual(__, "My dog is " + str(fido))
+        self.assertEqual("My dog is Fido", "My dog is " + str(fido))
 
     def test_repr_provides_a_more_complete_string_version(self):
         fido = self.Dog6("Fido")
-        self.assertEqual(__, repr(fido))
+        self.assertEqual("<Dog named 'Fido'>", repr(fido))
 
     def test_all_objects_support_str_and_repr(self):
         seq = [1, 2, 3]
 
-        self.assertEqual(__, str(seq))
-        self.assertEqual(__, repr(seq))
+        self.assertEqual('[1, 2, 3]', str(seq))
+        self.assertEqual('[1, 2, 3]', repr(seq))
 
-        self.assertEqual(__, str("STRING"))
-        self.assertEqual(__, repr("STRING"))
+        self.assertEqual("STRING", str("STRING"))
+        self.assertEqual("'STRING'", repr("STRING"))
