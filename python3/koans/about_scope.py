@@ -71,13 +71,13 @@ class AboutScope(Koan):
         global counter
         start = counter
         self.increment_using_local_counter(start)
-        self.assertEqual(__, counter == start + 1)
+        self.assertEqual(False, counter == start + 1)
 
     def test_incrementing_with_global_counter(self):
         global counter
         start = counter
         self.increment_using_global_counter()
-        self.assertEqual(__, counter == start + 1)
+        self.assertEqual(True, counter == start + 1)
 
     # ------------------------------------------------------------------
 
@@ -96,10 +96,10 @@ class AboutScope(Koan):
         return from_the_boosh()
 
     def test_getting_something_locally(self):
-        self.assertEqual(__, self.local_access())
+        self.assertEqual('this is a local shop for local people', self.local_access())
 
     def test_getting_something_nonlocally(self):
-        self.assertEqual(__, self.nonlocal_access())
+        self.assertEqual('eels', self.nonlocal_access())
 
     # ------------------------------------------------------------------
 
@@ -107,4 +107,6 @@ class AboutScope(Koan):
     deadly_bingo = [4, 8, 15, 16, 23, 42]
 
     def test_global_attributes_can_be_created_in_the_middle_of_a_class(self):
-        self.assertEqual(__, deadly_bingo[5])
+        self.assertEqual(deadly_bingo[-1], deadly_bingo[5])
+        self.assertEqual(42, deadly_bingo[5])
+        # /r/unexpectedLostReference
